@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js 14 Feature-Based プロジェクト
 
-## Getting Started
+## 📚 目次
 
-First, run the development server:
+- [ディレクトリ構成](#ディレクトリ構成)
+- [開発ガイドライン](#開発ガイドライン)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ディレクトリ構成
+
+```
+project-root/
+├── .storybook/               # Storybook設定
+├── public/                   # 静的ファイル
+├── src/
+│   ├── app/                  # App Router用のページ
+│   ├── components/           # 共通コンポーネント
+│   │   ├── ui/               # 基本UIコンポーネント
+│   │   └── layout/           # レイアウトコンポーネント
+│   ├── features/             # 機能別モジュール
+│   │   ├── auth/             # 認証機能の例
+│   │   │   ├── components/   # 認証関連コンポーネント
+│   │   │   ├── hooks/        # 認証関連フック
+│   │   │   ├── store/        # 認証状態管理
+│   │   │   └── utils/        # 認証関連ユーティリティ
+│   │   └── ...               # 他の機能
+│   ├── hooks/                # グローバルフック
+│   ├── lib/                  # ユーティリティと外部ライブラリラッパー
+│   ├── utils/                # 汎用ユーティリティ関数
+│   ├── styles/               # グローバルスタイル
+│   └── types/                # グローバル型定義
+├── .eslintrc.js              # ESLint設定
+├── .gitignore
+├── jest.config.js            # Jest設定
+├── next.config.js            # Next.js設定
+├── package.json
+└── tsconfig.json             # TypeScript設定
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 開発ガイドライン
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 新機能の追加
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. `src/features/`に新しいディレクトリを作成します。
+2. 機能に必要なコンポーネント、フック、ユーティリティを適切なサブディレクトリに配置します。
+3. 状態管理が必要な場合は、`store/`ディレクトリに Zustand ストアを作成します。
 
-## Learn More
+### コンポーネント開発
 
-To learn more about Next.js, take a look at the following resources:
+- 共通コンポーネントは`src/components/`に配置します。
+- 機能特有のコンポーネントは、対応する`features/`ディレクトリ内に配置します。
+- 各コンポーネントには Storybook のストーリーと Jest のテストを作成します。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 状態管理
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- グローバルな状態には Zustand を使用します。
+- API リクエストとサーバー状態の管理には React Query を使用します。
 
-## Deploy on Vercel
+### フォーム処理
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- フォームの構築には React Hook Form を使用します。
+- バリデーションスキーマには Zod を使用し、React Hook Form と統合します。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## テストと Storybook
+
+### テスト
+
+- Jest と react-testing-library を使用してユニットテストとインテグレーションテストを作成します。
+- テストファイルは対応するコンポーネントや機能と同じディレクトリに配置し、`.test.ts(x)`または`.spec.ts(x)`の拡張子を使用します。
+- テストの実行:
+  ```bash
+  npm test
+  ```
+
+### Storybook
+
+- 各 UI コンポーネントの Storybook ストーリーを作成します。
+- Storybook の起動:
+  ```bash
+  npm run storybook
+  ```
