@@ -1,27 +1,24 @@
-import { signIn } from "@/auth";
-import { redirect } from "next/navigation";
+"use client";
 
+import { useRouter } from "next/navigation";
+import { serverAction, serverGithubAction } from "../utils/authUtils";
 export function LoginForm() {
+  const router = useRouter();
+  const handleSubmit = async (formData: FormData) => {
+    try {
+      const result = await serverAction(formData);
+      if (result.success) {
+        router.push("/dashboard");
+      } else {
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
-      <form
-        action={async (formData) => {
-          "use server";
-          try {
-            const result = await signIn("credentials", {
-              ...Object.fromEntries(formData),
-              redirect: false,
-            });
-            if (result?.error) {
-              // エラー処理
-            } else {
-              redirect("/dashboard");
-            }
-          } catch (error) {
-            // エラー処理
-          }
-        }}
-      >
+      <form action={handleSubmit}>
         <label>
           Email
           <input name="email" type="email" />
@@ -33,12 +30,7 @@ export function LoginForm() {
         <button type="submit">Sign In</button>
       </form>
 
-      <form
-        action={async () => {
-          "use server";
-          await signIn("github", { redirectTo: "/dashboard" });
-        }}
-      >
+      <form action={serverGithubAction}>
         <button type="submit">Signin with GitHub</button>
       </form>
     </>
