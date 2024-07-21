@@ -19,7 +19,13 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/pages/*": ["pages/*"],
-      "@/styles/*": ["styles/*"]
+      "@/features/*": ["features/*"],
+      "@/constants/*": ["constants/*"],
+      "@/styles/*": ["styles/*"],
+      "@/types/*": ["types/*"],
+      "@/api/*": ["api/*"],
+      "@/utils/*": ["utils/*"],
+      "@/auth": ["auth"]
     },
     "plugins": [
       {
