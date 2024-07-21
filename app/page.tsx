@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "App Router",
+  title: "Welcome!!",
 };
 
 export default function Page() {

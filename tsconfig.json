@@ -22,7 +22,10 @@
       "@/features/*": ["features/*"],
       "@/constants/*": ["constants/*"],
       "@/styles/*": ["styles/*"],
-      "@/types/*": ["types/*"]
+      "@/types/*": ["types/*"],
+      "@/api/*": ["api/*"],
+      "@/utils/*": ["utils/*"],
+      "@/auth": ["auth"]
     },
     "plugins": [
       {

@@ -1,51 +1,46 @@
-import React from "react";
-import { useLoginForm } from "../hooks/useLoginForm";
+import { signIn } from "@/auth";
+import { redirect } from "next/navigation";
 
-export const LoginForm: React.FC = () => {
-  const { handleSubmit, onSubmit, register, errors, isLoading } =
-    useLoginForm();
-
+export function LoginForm() {
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
-      <div>
-        <label htmlFor="email" className="sr-only">
-          メールアドレス
+    <>
+      <form
+        action={async (formData) => {
+          "use server";
+          try {
+            const result = await signIn("credentials", {
+              ...Object.fromEntries(formData),
+              redirect: false,
+            });
+            if (result?.error) {
+              // エラー処理
+            } else {
+              redirect("/dashboard");
+            }
+          } catch (error) {
+            // エラー処理
+          }
+        }}
+      >
+        <label>
+          Email
+          <input name="email" type="email" />
         </label>
-        <input
-          id="email"
-          type="email"
-          {...register("email")}
-          className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-          placeholder="メールアドレス"
-        />
-        {errors.email && (
-          <p className="mt-2 text-sm text-red-600">{errors.email.message}</p>
-        )}
-      </div>
-      <div>
-        <label htmlFor="password" className="sr-only">
-          パスワード
+        <label>
+          Password
+          <input name="password" type="password" />
         </label>
-        <input
-          id="password"
-          type="password"
-          {...register("password")}
-          className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-          placeholder="パスワード"
-        />
-        {errors.password && (
-          <p className="mt-2 text-sm text-red-600">{errors.password.message}</p>
-        )}
-      </div>
-      <div>
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-        >
-          {isLoading ? "ログイン中..." : "ログイン"}
-        </button>
-      </div>
-    </form>
+        <button type="submit">Sign In</button>
+      </form>
+
+      <form
+        action={async () => {
+          "use server";
+          await signIn("github", { redirectTo: "/dashboard" });
+        }}
+      >
+        <button type="submit">Signin with GitHub</button>
+      </form>
+    </>
   );
-};
+}

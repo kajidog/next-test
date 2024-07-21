@@ -1,9 +1,9 @@
 // src/api/index.ts
 
+import { BASE_URL } from "@/constants/api-endpoints";
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { useAuthStore } from "@/features/auth/stores/authStore";
+
 // API のベース URL
-const BASE_URL = "/api";
 
 // カスタム エラー クラス
 export class ApiError extends Error {
@@ -18,12 +18,10 @@ export class ApiError extends Error {
 
 // API クライアントの作成
 export const createApiClient = (): AxiosInstance => {
-  const token = useAuthStore.getState().token;
   const client = axios.create({
     baseURL: BASE_URL,
     headers: {
       "Content-Type": "application/json",
-      Authorization: token ? `Bearer ${token}` : undefined,
     },
   });
   return client;
