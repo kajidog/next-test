@@ -6,7 +6,6 @@ import Credentials from "next-auth/providers/credentials";
 import { saltAndHashPassword } from "@/utils/password";
 
 export const authOption: NextAuthConfig = {
-  trustHost: true,
   providers: [
     GitHub,
     Credentials({
@@ -63,4 +62,6 @@ export const authOption: NextAuthConfig = {
       return !!auth;
     },
   },
+  basePath: "/api/auth",
+  secret: process.env.AUTH_SECRET,
 };
