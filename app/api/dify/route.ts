@@ -1,8 +1,5 @@
 import { MESSAGE_API_BASE_URL } from "@/constants/api-endpoints";
-import { Bot } from "@/types/bot";
 import { NextRequest, NextResponse } from "next/server";
-
-export const existingBots: Bot[] = [];
 
 // Dify作成API
 export async function POST(request: NextRequest) {
