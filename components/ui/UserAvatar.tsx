@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import { Avatar } from "@mui/material";
 
 export default async function UserAvatar() {
   const session = await auth();
@@ -7,8 +8,7 @@ export default async function UserAvatar() {
 
   return (
     <div>
-      <img src={session.user.image || ""} alt="User Avatar" />
-      <div>{session.user.email}</div>
+      <Avatar src={session.user.image || ""} alt="User Avatar" />
     </div>
   );
 }
