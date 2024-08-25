@@ -2,8 +2,6 @@ import { MESSAGE_API_BASE_URL } from "@/constants/api-endpoints";
 import { Bot } from "@/types/bot";
 import { NextRequest, NextResponse } from "next/server";
 
-export const existingBots: Bot[] = [];
-
 // ボット作成API
 export async function POST(request: NextRequest) {
   try {
@@ -21,11 +19,7 @@ export async function POST(request: NextRequest) {
       cache: "no-store",
     });
     const data = await res.json();
-    existingBots.push(data);
-    return NextResponse.json(
-      { error: false, bots: existingBots },
-      { status: 201 }
-    );
+    return NextResponse.json({ error: false, bots: [data] }, { status: 201 });
   } catch (error) {
     console.log(error);
 
