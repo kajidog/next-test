@@ -1,5 +1,5 @@
 export const BASE_URL = "/api";
-export const MESSAGE_API_BASE_URL = "http://localhost:8080";
+export const MESSAGE_API_BASE_URL = "http://dify.kajidog.com:12202";
 export const API_ENDPOINTS = {
   AUTH: {
     LOGIN: `/auth/login`,
