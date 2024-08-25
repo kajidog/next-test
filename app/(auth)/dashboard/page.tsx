@@ -1,22 +1,9 @@
-import UserAvatar from "@/components/ui/UserAvatar";
-import { signOut } from "@/auth";
+import BotFlow from "@/features/bot/components/BotFlow";
+
 export const metadata = {
-  title: "App Router",
+  title: "ダッシュボード",
 };
 
 export default function Page() {
-  return (
-    <>
-      <h1>Dash Board</h1>
-      <UserAvatar />
-      <form
-        action={async () => {
-          "use server";
-          await signOut({ redirectTo: "/login" });
-        }}
-      >
-        <button type="submit">Sign Out</button>
-      </form>
-    </>
-  );
+  return <BotFlow />;
 }
