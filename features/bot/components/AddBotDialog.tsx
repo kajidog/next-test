@@ -8,10 +8,9 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { useDialog } from "@/hooks/useDialog";
-import { useAddBot } from "../hooks/useAddBot";
 import { Bot } from "@/types/bot";
 import LoadingButton from "@mui/lab/LoadingButton";
+import { useAddBotDialog } from "../hooks/useAddBotDialog";
 
 export interface AddBotDialog {
   isOpen?: boolean;
@@ -20,39 +19,19 @@ export interface AddBotDialog {
 }
 
 export const AddBotDialog: React.FC<AddBotDialog> = (props) => {
-  const { isOpen, close, open } = useDialog({
+  const { dialogState, mutation, handleSubmitAddBotDialog } = useAddBotDialog({
     isOpen: props.isOpen,
+    onSubmit: props.onSubmit,
   });
-  const { handleAddBot, mutation } = useAddBot({
-    // 作成成功時の処理
-    onSuccess: (bots) => {
-      close();
-      props.onSubmit && props.onSubmit(bots);
-    },
-  });
-
-  // OKを押したときの処理
-  const handleSubmitAddBotDialog = (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const formJson = Object.fromEntries(formData.entries());
-    if (formJson.name) {
-      handleAddBot({
-        name: formJson.name as string,
-      });
-    }
-  };
 
   return (
     <>
       {/* 作成ボタンを開くボタン */}
-      <div onClick={open}>{props.children}</div>
+      <div onClick={dialogState.open}>{props.children}</div>
 
       {/* 作成ダイアログ */}
       <Dialog
-        open={isOpen}
+        open={dialogState.isOpen}
         onClose={close}
         PaperProps={{
           component: "form",

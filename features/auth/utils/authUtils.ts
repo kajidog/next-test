@@ -1,6 +1,7 @@
 "use server";
 
 import { signIn } from "@/auth";
+import { AuthError } from "next-auth";
 
 export async function serverGithubAction() {
   "use server";
@@ -23,6 +24,16 @@ export async function serverAction(formData: FormData) {
     }
   } catch (error) {
     console.error("Server action error:", error);
-    return { success: false, error: "An unexpected error occurred" };
+    if (error instanceof AuthError) {
+      return {
+        success: false,
+        error: error?.message,
+      };
+    } else {
+      return {
+        success: false,
+        error: "An unexpected error occurred",
+      };
+    }
   }
 }

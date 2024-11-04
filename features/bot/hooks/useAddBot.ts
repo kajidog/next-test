@@ -1,6 +1,7 @@
 import { addBot } from "@/api/bot";
 import { useMutation } from "@/hooks/useMutation";
-import { Bot, BotWithOptionalId } from "@/types/bot";
+import { Bot } from "@/types/bot";
+import { parseBotResponse } from "../utils/botsParse";
 
 export interface useAddBot {
   onSuccess?: (bots: Bot[]) => void;
@@ -12,7 +13,8 @@ export const useAddBot = (options: useAddBot | undefined) => {
     mutationFn: addBot(),
     onSuccess: (data) => {
       if (options?.onSuccess) {
-        options.onSuccess(data?.bots ?? []);
+        const bots = parseBotResponse(data?.bots || []);
+        options.onSuccess(bots);
       }
       return data?.bots ?? [];
     },

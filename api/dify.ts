@@ -20,11 +20,17 @@ export const fetchDifyList = () => {
 export const addDify = () => {
   const client = createApiClient();
   const url = API_ENDPOINTS.DIFY.INDEX;
-  return (body: { name: string; url: string; token: string; color: string }) =>
-    post<{
+  return (body: {
+    name: string;
+    url: string;
+    token: string;
+    color: string;
+  }) => {
+    return post<{
       error: boolean;
       difyList?: Dify[];
     }>(client, url, body);
+  };
 };
 
 /**

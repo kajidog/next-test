@@ -34,7 +34,11 @@ export const useBotFlow = () => {
     }
   }, [mutation.data]);
 
-  const [isAddMode, setIsAddMode] = useState<boolean | string>(false);
+  const [addNode, setIsAddMode] = useState({
+    isAddMode: false,
+    type: "none",
+    label: "none",
+  });
   const { screenToFlowPosition } = useReactFlow();
 
   const onConnect = useCallback(
@@ -71,6 +75,9 @@ export const useBotFlow = () => {
 
   const onAddNode = useCallback(
     (event: React.MouseEvent) => {
+      if (addNode.isAddMode === false) {
+        return;
+      }
       const position = screenToFlowPosition({
         x: event.clientX,
         y: event.clientY,
@@ -78,14 +85,14 @@ export const useBotFlow = () => {
 
       const newNode: Node = {
         id: `${nodes.length + 1}`,
-        data: { label: `${isAddMode}` },
+        data: { label: `${addNode.label}` },
         position,
-        type: isAddMode === "discordReply" ? "discordReply" : "dify",
+        type: addNode.type,
       };
       setNodes((nds) => [...nds, newNode]);
-      setIsAddMode(false);
+      setIsAddMode((mode) => ({ ...mode, isAddMode: false }));
     },
-    [nodes, setNodes, screenToFlowPosition, isAddMode]
+    [nodes, setNodes, screenToFlowPosition, addNode]
   );
 
   const onSave = useCallback(async () => {
@@ -98,12 +105,12 @@ export const useBotFlow = () => {
     edges,
     setEdges,
     onSave,
-    onAddNode: isAddMode ? onAddNode : undefined,
+    onAddNode: addNode.isAddMode ? onAddNode : undefined,
     handleEdgesChange,
     handleNodesChange,
     onEdgeDoubleClick,
     onConnect,
-    isAddMode,
+    isAddMode: addNode.isAddMode,
     setIsAddMode,
   };
 };

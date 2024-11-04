@@ -3,6 +3,7 @@ import { useBotStore } from "../stores/botStore";
 import { useMutation } from "@/hooks/useMutation";
 import { useEffect } from "react";
 import { Edge, Node } from "@xyflow/react";
+import { parseBotResponse } from "../utils/botsParse";
 
 export interface useBot {
   isLoad?: boolean;
@@ -16,8 +17,9 @@ export const useBot = (options?: useBot) => {
     mutationFn: fetchBots(),
     onSuccess: (data) => {
       if (data?.bots) {
-        setBots(data.bots);
-        return data.bots;
+        const bots = parseBotResponse(data.bots);
+        setBots(bots);
+        return bots;
       }
       setBots([]);
       return [];

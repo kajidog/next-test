@@ -3,22 +3,21 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { botId: string } }
+  { params }: { params: { botId: string[] } }
 ) {
   try {
     const body = await request.json();
-    const res = await fetch(`${MESSAGE_API_BASE_URL}/bot/flow`, {
+    const res = await fetch(`${MESSAGE_API_BASE_URL}/flow-data`, {
       method: "POST",
       body: JSON.stringify({
         ...body,
-        id: "t" + params.botId,
+        key: params.botId[0],
       }),
       headers: {
         "Content-Type": "application/json",
       },
       cache: "no-store",
     });
-    await res.json();
     return NextResponse.json({ error: false }, { status: 201 });
   } catch (error) {
     return NextResponse.json(
@@ -34,7 +33,7 @@ export async function GET(
 ) {
   try {
     const res = await fetch(
-      `${MESSAGE_API_BASE_URL}/bot/flow/t${params.botId}`,
+      `${MESSAGE_API_BASE_URL}/flow-data/${params.botId}`,
       {
         method: "GET",
         headers: {

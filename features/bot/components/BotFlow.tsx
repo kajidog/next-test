@@ -7,14 +7,14 @@ import {
   ReactFlow,
   ReactFlowProvider,
 } from "@xyflow/react";
-import { Button } from "@mui/material";
-import { useDify } from "@/features/dify/hooks/useDify";
 import { CustomDifyNode } from "@/components/ui/CustomDifyNode";
 import { CustomDiscordReplyNode } from "@/components/ui/CustomDiscordReplyNode";
 import { CustomChannelNode } from "@/components/ui/CustomChannelNode";
 import { CustomStartNode } from "@/components/ui/CustomStartNode";
 import { CustomServerNode } from "@/components/ui/CustomServerNode";
 import { useBotFlow } from "../hooks/useBotFlow";
+import { Button } from "@mui/material";
+import { useDify } from "@/features/dify/hooks/useDify";
 
 export interface BotFlow {}
 
@@ -42,7 +42,7 @@ export const BotFlow: React.FC<BotFlow> = () => {
   const { difyList } = useDify();
 
   return (
-    <div className="absolute inset-0 w-screen h-screen">
+    <div className="absolute inset-0 w-full h-full">
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -91,7 +91,13 @@ export const BotFlow: React.FC<BotFlow> = () => {
           >
             <Button
               variant="outlined"
-              onClick={() => setIsAddMode("discordReply")}
+              onClick={() =>
+                setIsAddMode({
+                  isAddMode: true,
+                  type: "discordReply",
+                  label: "discordReply",
+                })
+              }
             >
               Discordに返信を追加
             </Button>
@@ -129,14 +135,28 @@ export const BotFlow: React.FC<BotFlow> = () => {
               <Button
                 variant="outlined"
                 key={dify.name}
-                onClick={() => setIsAddMode(dify.name)}
+                onClick={() =>
+                  setIsAddMode({
+                    isAddMode: true,
+                    type: "dify",
+                    label: dify.name,
+                  })
+                }
               >
                 {dify.name}を追加
               </Button>
             </span>
           ))}
         </span>
-        <button onClick={() => setIsAddMode(false)}>
+        <button
+          onClick={() =>
+            setIsAddMode({
+              isAddMode: false,
+              type: "none",
+              label: "none",
+            })
+          }
+        >
           {isAddMode && "キャンセル"}
         </button>
       </div>
@@ -158,7 +178,7 @@ export const BotFlow: React.FC<BotFlow> = () => {
         style={{
           position: "absolute",
           top: 70,
-          right: 50,
+          left: 50,
           background: "white",
           padding: 10,
           zIndex: 4,

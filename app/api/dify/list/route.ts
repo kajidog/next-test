@@ -12,7 +12,6 @@ export async function GET() {
       cache: "no-store",
     });
     const data = await res.json();
-    console.log({ data });
     return NextResponse.json({ error: false, difyList: data }, { status: 201 });
   } catch (error) {
     console.log({ error });

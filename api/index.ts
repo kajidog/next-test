@@ -3,8 +3,6 @@
 import { BASE_URL } from "@/constants/api-endpoints";
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
-// API のベース URL
-
 // カスタム エラー クラス
 export class ApiError extends Error {
   constructor(
