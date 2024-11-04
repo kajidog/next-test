@@ -11,11 +11,13 @@ export default function DashboardLayout({
       <div className="z-10 bg-gray-100">
         <Header />
       </div>
-      <div className="flex min-h-full">
+      <div className="flex flex-grow">
         <div className="w-24 z-10 bg-gray-100">
           <Sidebar />
         </div>
-        <div className="-z-0 flex-grow flex-shrink min-h-full">{children}</div>
+        <div className="-z-0 flex-grow flex-shrink min-h-full relative">
+          {children}
+        </div>
       </div>
     </>
   );

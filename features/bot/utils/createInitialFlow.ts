@@ -17,7 +17,7 @@ export const createInitialFlow = (bot: Bot) => {
     secondIndex++;
     const guild = bot.guilds[guildId];
     nodes.push({
-      id: guild.id,
+      id: `${bot.id}-${guildId}`,
       type: "server",
       data: { label: guild.name },
       position: {
@@ -28,7 +28,7 @@ export const createInitialFlow = (bot: Bot) => {
     edges.push({
       id: `e${bot.id}-${guildId}`,
       source: bot.id,
-      target: guildId,
+      target: `${bot.id}-${guildId}`,
       deletable: true,
     });
     Object.keys(guild.channels).forEach((channelId) => {
@@ -37,7 +37,7 @@ export const createInitialFlow = (bot: Bot) => {
       thirdIndex++;
       const channel = guild.channels[channelId];
       nodes.push({
-        id: channel.id,
+        id: `${bot.id}-${channel.id}`,
         type: "channel",
         data: { label: channel.name },
         position: {
@@ -46,9 +46,9 @@ export const createInitialFlow = (bot: Bot) => {
         },
       });
       edges.push({
-        id: `e${guildId}-${channelId}`,
-        source: guildId,
-        target: channelId,
+        id: `${bot.id}-e${guildId}-${channelId}`,
+        source: `${bot.id}-${guildId}`,
+        target: `${bot.id}-${channel.id}`,
         deletable: true,
       });
     });

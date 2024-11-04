@@ -1,4 +1,4 @@
-import { NextAuthConfig } from "next-auth";
+import { AuthError, NextAuthConfig } from "next-auth";
 import GitHub from "next-auth/providers/github";
 import { loginFormSchema } from "@/features/auth/utils/loginFormSchema";
 import { ZodError } from "zod";
@@ -10,6 +10,8 @@ export const authOption: NextAuthConfig = {
     GitHub,
     Credentials({
       // You can specify which fields should be submitted, by adding keys to the `credentials` object.
+      name: "Credentials",
+
       // e.g. domain, username, password, 2FA token, etc.
       credentials: {
         email: { label: "Email", type: "text" },
@@ -45,7 +47,7 @@ export const authOption: NextAuthConfig = {
         } catch (error) {
           if (error instanceof ZodError) {
             // Return `null` to indicate that the credentials are invalid
-            return null;
+            throw new AuthError(error.errors[0].message);
           } else {
             return null;
           }

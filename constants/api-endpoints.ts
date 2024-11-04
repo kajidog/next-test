@@ -22,4 +22,8 @@ export const API_ENDPOINTS = {
     LIST: `/dify/list`,
     INDEX: `/dify`,
   },
+  MESSAGE_STORE: {
+    LIST: `/message-store/list`,
+    INDEX: `/message-store`,
+  },
 };
