@@ -1,4 +1,4 @@
-import { Bot, DiscordBot } from "@/types/bot";
+import { DiscordBot } from "@/types/bot";
 
 export const createInitialFlow = (bot: DiscordBot) => {
   let oneIndex = 0;

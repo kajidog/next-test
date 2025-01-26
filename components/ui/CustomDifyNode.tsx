@@ -1,7 +1,7 @@
-import { BaseHandleStyle } from "@/constants/layout";
+import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import { Typography } from "@mui/material";
 import { Handle, NodeProps, Position } from "@xyflow/react";
-import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
+import { BaseHandleStyle } from "@/constants/layout";
 
 export const CustomDifyNode = ({
   data,

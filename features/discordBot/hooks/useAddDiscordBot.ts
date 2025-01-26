@@ -1,20 +1,19 @@
 import { addBot } from "@/api/bot";
 import { useMutation } from "@/hooks/useMutation";
-import { Bot } from "@/types/bot";
-import { parseBotResponse } from "../utils/botsParse";
 
-export interface useAddDiscordBot {
-  onSuccess?: (bots: Bot[]) => void;
+export interface useAddDiscordBotOptions {
+  onSuccess?: () => void;
 }
 
-export const useAddDiscordBot = (options: useAddDiscordBot | undefined) => {
+export const useAddDiscordBot = (
+  options: useAddDiscordBotOptions | undefined,
+) => {
   // ボット作成API
   const mutation = useMutation({
     mutationFn: addBot(),
     onSuccess: (data) => {
       if (options?.onSuccess) {
-        const bots = parseBotResponse(data?.bots || []);
-        options.onSuccess(bots);
+        options.onSuccess();
       }
       return data?.bots ?? [];
     },

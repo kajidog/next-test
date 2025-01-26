@@ -1,10 +1,10 @@
 "use client";
 
-import AddBotDialog from "@/features/discordBot/components/AddBotDialog";
-import { useDiscordBot } from "@/features/discordBot/hooks/useDiscordBot";
+import { Divider, Skeleton, Typography } from "@mui/material";
 import AddDifyDialog from "@/features/dify/components/AddDifyDialog";
 import { useDify } from "@/features/dify/hooks/useDify";
-import { Divider, Skeleton, Typography } from "@mui/material";
+import AddBotDialog from "@/features/discordBot/components/AddBotDialog";
+import { useDiscordBot } from "@/features/discordBot/hooks/useDiscordBot";
 
 export const Sidebar = () => {
   const { discordBots, mutation, selectedBotId, setSelectedBotId } =

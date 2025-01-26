@@ -1,21 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import SaveIcon from "@mui/icons-material/Save";
 import {
   Box,
-  Popover,
+  Button,
+  Fade,
   List,
   ListItem,
   ListItemText,
-  Typography,
-  Fade,
-  Button,
   Paper,
+  Popover,
+  Typography,
 } from "@mui/material";
-import SaveIcon from "@mui/icons-material/Save";
-import { getNavigationIcon } from "./navigation/navigationIcons";
-import { useNavigationData } from "./navigation/navigationData";
+import React, { useState } from "react";
 import { useBotFlow } from "../hooks/useBotFlow";
+import { useNavigationData } from "./navigation/navigationData";
+import { getNavigationIcon } from "./navigation/navigationIcons";
 
 export interface FooterNavigationProps {
   setIsAddMode: ReturnType<typeof useBotFlow>["setIsAddMode"];
@@ -28,7 +28,7 @@ export default function FooterNavigation(props: FooterNavigationProps) {
   const { navigationData } = useNavigationData();
   const handleClick = (
     event: React.MouseEvent<HTMLElement>,
-    sectionId: string
+    sectionId: string,
   ) => {
     setAnchorEl(event.currentTarget);
     setActiveSection(sectionId);

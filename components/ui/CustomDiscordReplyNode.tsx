@@ -1,6 +1,6 @@
-import { BaseHandleStyle } from "@/constants/layout";
 import { Typography } from "@mui/material";
 import { Handle, NodeProps, Position } from "@xyflow/react";
+import { BaseHandleStyle } from "@/constants/layout";
 
 export const CustomDiscordReplyNode = ({
   data,

@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import {
+  Button,
   Dialog,
-  DialogTitle,
-  DialogContent,
   DialogActions,
+  DialogContent,
+  DialogTitle,
   TextField,
-  Button
 } from "@mui/material";
+import React, { useState } from "react";
 import { DifyBot } from "@/types/bot";
 
 interface AddDifyBotDialogProps {
@@ -17,7 +17,11 @@ interface AddDifyBotDialogProps {
   bot: DifyBot | null;
 }
 
-export function AddDifyBotDialog({ open, onOpenChange, bot }: AddDifyBotDialogProps) {
+export function AddDifyBotDialog({
+  open,
+  onOpenChange,
+  bot,
+}: AddDifyBotDialogProps) {
   const [name, setName] = useState(bot?.name || "");
   const [url, setUrl] = useState(bot?.url || "");
   const [token, setToken] = useState(bot?.token || "");
@@ -29,15 +33,13 @@ export function AddDifyBotDialog({ open, onOpenChange, bot }: AddDifyBotDialogPr
   };
 
   return (
-    <Dialog 
-      open={open} 
+    <Dialog
+      open={open}
       onClose={() => onOpenChange(false)}
       maxWidth="sm"
       fullWidth
     >
-      <DialogTitle>
-        {bot ? "Edit Dify Bot" : "Add Dify Bot"}
-      </DialogTitle>
+      <DialogTitle>{bot ? "Edit Dify Bot" : "Add Dify Bot"}</DialogTitle>
       <form onSubmit={handleSubmit}>
         <DialogContent>
           <TextField

@@ -1,13 +1,13 @@
-import { MESSAGE_API_BASE_URL } from "@/constants/api-endpoints";
 import { NextRequest, NextResponse } from "next/server";
+import { MESSAGE_API_BASE_URL } from "@/constants/api-endpoints";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { botId: string[] } }
+  { params }: { params: { botId: string[] } },
 ) {
   try {
     const body = await request.json();
-    const res = await fetch(`${MESSAGE_API_BASE_URL}/flow-data`, {
+    await fetch(`${MESSAGE_API_BASE_URL}/flow-data`, {
       method: "POST",
       body: JSON.stringify({
         ...body,
@@ -19,17 +19,17 @@ export async function POST(
       cache: "no-store",
     });
     return NextResponse.json({ error: false }, { status: 201 });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: true, message: "Invalid request" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }
 
 export async function GET(
   _: NextRequest,
-  { params }: { params: { botId: string } }
+  { params }: { params: { botId: string } },
 ) {
   try {
     const res = await fetch(
@@ -40,14 +40,14 @@ export async function GET(
           "Content-Type": "application/json",
         },
         cache: "no-store",
-      }
+      },
     );
     const data = await res.json();
     return NextResponse.json(data, { status: 201 });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: true, message: "Invalid request" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }

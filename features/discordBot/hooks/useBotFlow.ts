@@ -12,16 +12,16 @@ import {
   useNodesState,
   useReactFlow,
 } from "@xyflow/react";
-import { useCallback, useEffect, useState } from "react";
-import { useSaveBotFlow } from "./useSaveBotFlow";
-import { useBotFlowValues } from "./useBotFlowValues";
+import React, { useCallback, useEffect, useState } from "react";
 import { DiscordBot } from "@/types/bot";
+import { useBotFlowValues } from "./useBotFlowValues";
+import { useSaveBotFlow } from "./useSaveBotFlow";
 
 export const useBotFlow = (id: DiscordBot["name"]) => {
   const saveMutate = useSaveBotFlow(); // フローを保存する処理
 
-  const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
+  const [nodes, setNodes] = useNodesState<Node>([]);
+  const [edges, setEdges] = useEdgesState<Edge>([]);
 
   const { mutation } = useBotFlowValues(id);
 
@@ -44,14 +44,14 @@ export const useBotFlow = (id: DiscordBot["name"]) => {
   const onConnect = useCallback(
     (params: Connection) =>
       setEdges((eds) => addEdge({ ...params, deletable: true }, eds)),
-    [setEdges]
+    [setEdges],
   );
 
   const onEdgeDoubleClick: EdgeMouseHandler = useCallback(
     (event, edge) => {
       setEdges((eds) => eds.filter((e) => e.id !== edge.id));
     },
-    [setEdges]
+    [setEdges],
   );
 
   const handleNodesChange: OnNodesChange<Node> = useCallback(
@@ -59,18 +59,18 @@ export const useBotFlow = (id: DiscordBot["name"]) => {
       setNodes((nds) =>
         applyNodeChanges(
           changes.filter((change) => change.type !== "remove" || change.id),
-          nds
-        )
+          nds,
+        ),
       );
     },
-    [setNodes]
+    [setNodes],
   );
 
   const handleEdgesChange: OnEdgesChange<Edge> = useCallback(
     (changes) => {
       setEdges((eds) => applyEdgeChanges(changes, eds));
     },
-    [setEdges]
+    [setEdges],
   );
 
   const onAddNode = useCallback(
@@ -92,7 +92,7 @@ export const useBotFlow = (id: DiscordBot["name"]) => {
       setNodes((nds) => [...nds, newNode]);
       setIsAddMode((mode) => ({ ...mode, isAddMode: false }));
     },
-    [nodes, setNodes, screenToFlowPosition, addNode]
+    [nodes, setNodes, screenToFlowPosition, addNode],
   );
 
   const onSave = useCallback(async () => {

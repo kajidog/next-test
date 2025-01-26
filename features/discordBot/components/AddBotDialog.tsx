@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import LoadingButton from "@mui/lab/LoadingButton";
 import {
   Button,
   Dialog,
@@ -8,17 +8,16 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { Bot } from "@/types/bot";
-import LoadingButton from "@mui/lab/LoadingButton";
+import React, { ReactNode } from "react";
 import { useAddBotDialog } from "../hooks/useAddBotDialog";
 
-export interface AddBotDialog {
+export interface AddBotDialogProps {
   isOpen?: boolean;
   children: ReactNode;
-  onSubmit?: (bots: Bot[]) => void;
+  onSubmit?: () => void;
 }
 
-export const AddBotDialog: React.FC<AddBotDialog> = (props) => {
+export const AddBotDialog: React.FC<AddBotDialogProps> = (props) => {
   const { dialogState, mutation, handleSubmitAddBotDialog } = useAddBotDialog({
     isOpen: props.isOpen,
     onSubmit: props.onSubmit,

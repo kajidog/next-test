@@ -1,6 +1,6 @@
-import { Dify, DifyWithOptionalId } from "@/types/dify";
-import { createApiClient, get, post } from ".";
 import { API_ENDPOINTS } from "@/constants/api-endpoints";
+import { Dify } from "@/types/dify";
+import { createApiClient, get, post } from ".";
 
 /**
  * サーバからDify一覧を取得

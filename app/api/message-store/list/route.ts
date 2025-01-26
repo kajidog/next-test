@@ -1,5 +1,5 @@
+import { NextResponse } from "next/server";
 import { MESSAGE_API_BASE_URL } from "@/constants/api-endpoints";
-import { NextRequest, NextResponse } from "next/server";
 
 // ボット一覧を取得するAPI
 export async function GET() {
@@ -14,14 +14,14 @@ export async function GET() {
     const data = await res.json();
     return NextResponse.json(
       { error: false, messageStores: data },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     console.log(error);
 
     return NextResponse.json(
       { error: true, message: "Invalid request" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }

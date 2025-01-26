@@ -1,3 +1,11 @@
 {
-  "cSpell.words": ["Dify", "zustand"]
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "cSpell.words": ["Dify", "zustand"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.removeUnusedImports": "explicit"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

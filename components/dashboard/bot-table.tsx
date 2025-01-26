@@ -1,20 +1,20 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import DeleteForeverOutlined from "@mui/icons-material/DeleteForeverOutlined";
+import EditIcon from "@mui/icons-material/Edit";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import {
+  Button,
+  Paper,
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableHead,
   TableRow,
-  Button,
-  TableContainer,
-  Paper,
 } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import { useRouter } from "next/navigation";
 import { Bot } from "@/types/bot";
-import DeleteForeverOutlined from "@mui/icons-material/DeleteForeverOutlined";
 
 interface BotTableProps {
   bots: Bot[];
@@ -49,15 +49,19 @@ export function BotTable({ bots, type, onEdit }: BotTableProps) {
                 >
                   削除
                 </Button>
-                <Button
-                  variant="outlined"
-                  size="small"
-                  startIcon={<EditIcon />}
-                  onClick={() => onEdit(bot)}
-                  sx={{ mr: 1 }}
-                >
-                  編集
-                </Button>
+                {type === "dify" && (
+                  <>
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      startIcon={<EditIcon />}
+                      onClick={() => onEdit(bot)}
+                      sx={{ mr: 1 }}
+                    >
+                      編集
+                    </Button>
+                  </>
+                )}
                 {type === "discord" && (
                   <>
                     <Button

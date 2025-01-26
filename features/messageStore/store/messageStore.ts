@@ -1,5 +1,5 @@
-import { MessageStore } from "@/types/messageStore";
 import { create } from "zustand";
+import { MessageStore } from "@/types/messageStore";
 
 interface MessageStoreState {
   messageStores: MessageStore[];

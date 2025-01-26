@@ -1,5 +1,5 @@
-import { auth } from "@/auth";
 import { Avatar } from "@mui/material";
+import { auth } from "@/auth";
 
 export default async function UserAvatar() {
   const session = await auth();

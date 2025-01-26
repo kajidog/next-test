@@ -1,7 +1,8 @@
+import DnsOutlinedIcon from "@mui/icons-material/DnsOutlined";
 import { Typography } from "@mui/material";
 import { Handle, NodeProps, Position } from "@xyflow/react";
-import DnsOutlinedIcon from "@mui/icons-material/DnsOutlined";
 import { BaseHandleStyle } from "@/constants/layout";
+
 export const CustomServerNode = ({
   data,
 }: NodeProps<{

@@ -1,13 +1,13 @@
-import UserAvatar from "@/components/ui/UserAvatar";
 import { Typography } from "@mui/material";
 import React from "react";
+import UserAvatar from "@/components/ui/UserAvatar";
 import { HeaderButtonComponent } from "./HeaderButton";
 
-export interface HeaderComponent {
+export interface HeaderProps {
   signOut: () => void;
 }
 
-export const HeaderComponent: React.FC<HeaderComponent> = ({ signOut }) => {
+export const HeaderComponent: React.FC<HeaderProps> = ({ signOut }) => {
   return (
     <div className="p-2 flex justify-between items-center">
       <Typography>Voice-Ping</Typography>

@@ -1,7 +1,7 @@
-import { BaseHandleStyle } from "@/constants/layout";
+import SaveAltOutlinedIcon from "@mui/icons-material/SaveAltOutlined";
 import { Typography } from "@mui/material";
 import { Handle, NodeProps, Position } from "@xyflow/react";
-import SaveAltOutlinedIcon from "@mui/icons-material/SaveAltOutlined";
+import { BaseHandleStyle } from "@/constants/layout";
 
 export const CustomMessageStoreNode = ({
   data,

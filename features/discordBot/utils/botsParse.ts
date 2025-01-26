@@ -1,5 +1,5 @@
 import { ApiBot } from "@/api/bot";
-import { Bot, DiscordBot, Guild } from "@/types/bot";
+import { DiscordBot, Guild } from "@/types/bot";
 
 export const parseBotResponse = (bots: ApiBot[]): DiscordBot[] => {
   const _bots: DiscordBot[] = [];

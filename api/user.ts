@@ -1,4 +1,5 @@
 import { User } from "@/types/user";
+
 export interface UserProfileResponse {
   user: User;
 }

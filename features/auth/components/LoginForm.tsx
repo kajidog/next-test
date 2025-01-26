@@ -1,9 +1,8 @@
 "use client";
-import { serverGithubAction } from "../utils/authUtils";
-import { Alert, Card, CardContent, CardHeader } from "@mui/material";
 
+import { Alert, Card, CardContent } from "@mui/material";
 import { useFormState, useFormStatus } from "react-dom";
-import { serverSignIn, State } from "../utils/authUtils";
+import { serverGithubAction, serverSignIn, State } from "../utils/authUtils";
 
 export function LoginForm() {
   const initialState: State = { error: "" };

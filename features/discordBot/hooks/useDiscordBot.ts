@@ -1,9 +1,9 @@
-import { fetchBots, addBot } from "@/api/bot";
-import { useMutation } from "@/hooks/useMutation";
-import { useEffect } from "react";
 import { Edge, Node } from "@xyflow/react";
-import { parseBotResponse } from "../utils/botsParse";
+import { useEffect } from "react";
+import { fetchBots } from "@/api/bot";
+import { useMutation } from "@/hooks/useMutation";
 import { useDiscordBotStore } from "../stores/discordBotStore";
+import { parseBotResponse } from "../utils/botsParse";
 
 export interface useBot {
   isLoad?: boolean;
@@ -34,7 +34,7 @@ export const useDiscordBot = (options?: useBot) => {
     }
   }, []);
 
-  const handleSavaFlow = (nodes: Node[], edges: Edge[]) => {};
+  const handleSavaFlow = (_nodes: Node[], _edges: Edge[]) => {};
   return {
     discordBots,
     selectedBotId,

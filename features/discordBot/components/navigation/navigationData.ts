@@ -1,10 +1,11 @@
 "use client";
 
-import { useDiscordBot } from "../../hooks/useDiscordBot";
-import { useMessageStore } from "@/features/messageStore/hooks/useMessageStore";
-import { useDify } from "@/features/dify/hooks/useDify";
+import { useParams } from "next/navigation";
 import { useMemo } from "react";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useDify } from "@/features/dify/hooks/useDify";
+import { useMessageStore } from "@/features/messageStore/hooks/useMessageStore";
+import { useDiscordBot } from "../../hooks/useDiscordBot";
+
 interface NavigationItem {
   id: string;
   name: string;
@@ -49,7 +50,7 @@ export const useNavigationData = () => {
             id: discordBotInfo.guilds[guildId].channels[channelId].name,
             name: `${discordBotInfo.guilds[guildId].name} ${discordBotInfo.guilds[guildId].channels[channelId].name}`,
           });
-        }
+        },
       );
     });
 

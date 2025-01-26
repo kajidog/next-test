@@ -1,8 +1,8 @@
+import { useEffect } from "react";
 import { fetchMessageStores } from "@/api/messageStore";
 import { useMutation } from "@/hooks/useMutation";
-import { useMessageStore as useMessageStoreValue } from "../store/messageStore";
 import { BaseOptionProps } from "@/types/index";
-import { useEffect } from "react";
+import { useMessageStore as useMessageStoreValue } from "../store/messageStore";
 
 export const useMessageStore = (options?: BaseOptionProps) => {
   const { setMessageStores, messageStores } = useMessageStoreValue();

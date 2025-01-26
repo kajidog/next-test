@@ -1,6 +1,5 @@
-import { DifyBot } from "@/types/bot";
-import { Dify } from "@/types/dify";
 import { create } from "zustand";
+import { DifyBot } from "@/types/bot";
 
 interface DifyState {
   difyList: DifyBot[];

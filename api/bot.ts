@@ -1,6 +1,6 @@
-import { createApiClient, get, post } from ".";
-import { API_ENDPOINTS } from "@/constants/api-endpoints";
 import { Edge, Node } from "@xyflow/react";
+import { API_ENDPOINTS } from "@/constants/api-endpoints";
+import { createApiClient, get, post } from ".";
 
 interface ApiChannel {
   id: string;

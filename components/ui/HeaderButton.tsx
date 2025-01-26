@@ -1,13 +1,12 @@
 import Link from "next/link";
 import React, { ReactNode } from "react";
-export interface HeaderButtonComponent {
+
+export interface HeaderButtonProps {
   href: string;
   icon?: ReactNode;
   children: ReactNode;
 }
-export const HeaderButtonComponent: React.FC<HeaderButtonComponent> = (
-  props
-) => {
+export const HeaderButtonComponent: React.FC<HeaderButtonProps> = (props) => {
   return (
     <div
       className="

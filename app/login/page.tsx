@@ -1,5 +1,5 @@
-import { LoginForm } from "@/features/auth/components/LoginForm";
 import { Typography } from "@mui/material";
+import { LoginForm } from "@/features/auth/components/LoginForm";
 
 export default () => {
   return (

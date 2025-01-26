@@ -1,10 +1,9 @@
-import { saveBotFlow } from "@/api/bot";
 import { useMutation } from "@tanstack/react-query";
-import { useDiscordBotStore } from "../stores/discordBotStore";
 import { Edge, Node } from "@xyflow/react";
+import { saveBotFlow } from "@/api/bot";
 import { DiscordBot } from "@/types/bot";
 
-export interface useSaveBotFlow {
+export interface useSaveBotFlowOptions {
   selectedBotId?: DiscordBot["name"];
 }
 /**
@@ -12,7 +11,7 @@ export interface useSaveBotFlow {
  * @param options
  * @returns
  */
-export const useSaveBotFlow = (options?: useSaveBotFlow) => {
+export const useSaveBotFlow = (_options?: useSaveBotFlowOptions) => {
   const mutation = useMutation({
     mutationFn: saveBotFlow(),
   });
@@ -20,7 +19,7 @@ export const useSaveBotFlow = (options?: useSaveBotFlow) => {
   const handleSaveBotFlow = async (
     nodes: Node[],
     edges: Edge[],
-    name: string
+    name: string,
   ) => {
     await mutation.mutateAsync({
       edges,

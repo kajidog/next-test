@@ -1,31 +1,27 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import Delete from "@mui/icons-material/DeleteOutline";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import {
+  Button,
+  Paper,
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableHead,
   TableRow,
-  Button,
-  TableContainer,
-  Paper,
 } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import { MessageStore } from "@/types/messageStore";
 import Link from "next/link";
-import Delete from "@mui/icons-material/DeleteOutline";
+import { useRouter } from "next/navigation";
+import { MessageStore } from "@/types/messageStore";
 
 interface MessageStoreTableProps {
   messageStores: MessageStore[];
   onEdit: (bot: MessageStore) => void;
 }
 
-export function MessageServiceTable({
-  messageStores,
-  onEdit,
-}: MessageStoreTableProps) {
+export function MessageServiceTable({ messageStores }: MessageStoreTableProps) {
   const router = useRouter();
 
   return (

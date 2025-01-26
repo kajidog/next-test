@@ -1,12 +1,11 @@
 import { upsertMessageStore } from "@/api/messageStore";
 import { useMutation } from "@/hooks/useMutation";
-import { MessageStore } from "@/types/messageStore";
 
-export interface useAddMessageStore {
+export interface useAddMessageStoreOptions {
   onSuccess?: () => void; // 作成成功時に親で実行したいコールバック関数
 }
 
-export const useAddMessageStore = (options?: useAddMessageStore) => {
+export const useAddMessageStore = (options?: useAddMessageStoreOptions) => {
   // MessageStore作成API
   const mutation = useMutation({
     mutationFn: upsertMessageStore(),

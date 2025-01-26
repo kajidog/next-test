@@ -1,6 +1,6 @@
+import { API_ENDPOINTS } from "@/constants/api-endpoints";
 import { MessageStore } from "@/types/messageStore";
 import { createApiClient, get, post } from ".";
-import { API_ENDPOINTS } from "@/constants/api-endpoints";
 
 /**
  * メッセージストア一覧を取得

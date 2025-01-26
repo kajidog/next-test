@@ -1,5 +1,5 @@
-import { DiscordBot } from "@/types/bot";
 import { create } from "zustand";
+import { DiscordBot } from "@/types/bot";
 
 interface BotState {
   discordBots: DiscordBot[];

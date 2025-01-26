@@ -1,7 +1,7 @@
-import { BaseHandleStyle } from "@/constants/layout";
+import PlayArrowOutlinedIcon from "@mui/icons-material/PlayArrowOutlined";
 import { Typography } from "@mui/material";
 import { Handle, NodeProps, Position } from "@xyflow/react";
-import PlayArrowOutlinedIcon from "@mui/icons-material/PlayArrowOutlined";
+import { BaseHandleStyle } from "@/constants/layout";
 
 export const CustomStartNode = ({
   data,

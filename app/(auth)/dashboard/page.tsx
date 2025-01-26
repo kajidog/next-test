@@ -1,24 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import {
-  Container,
+  Button,
   Card,
   CardContent,
   CardHeader,
-  Button,
-  Typography,
+  Container,
 } from "@mui/material";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { BotTable } from "@/components/dashboard/bot-table";
-import { AddDiscordBotDialog } from "@/components/dashboard/add-discord-bot-dialog";
+import { useState } from "react";
 import { AddDifyBotDialog } from "@/components/dashboard/add-dify-bot-dialog";
-import { Bot, DiscordBot, DifyBot } from "@/types/bot";
-import { useDiscordBot } from "@/features/discordBot/hooks/useDiscordBot";
-import { useDify } from "@/features/dify/hooks/useDify";
-import { useMessageStore } from "@/features/messageStore/hooks/useMessageStore";
-import { MessageServiceTable } from "@/components/dashboard/message-table";
+import { AddDiscordBotDialog } from "@/components/dashboard/add-discord-bot-dialog";
 import { AddMessageStoreDialog } from "@/components/dashboard/add-message-store-dialog";
+import { BotTable } from "@/components/dashboard/bot-table";
+import { MessageServiceTable } from "@/components/dashboard/message-table";
+import { useDify } from "@/features/dify/hooks/useDify";
+import { useDiscordBot } from "@/features/discordBot/hooks/useDiscordBot";
+import { useMessageStore } from "@/features/messageStore/hooks/useMessageStore";
+import { Bot, DifyBot, DiscordBot } from "@/types/bot";
 import { MessageStore } from "@/types/messageStore";
 
 export default function DashboardPage() {

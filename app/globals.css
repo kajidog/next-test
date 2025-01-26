@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body, html {
-    min-height: 100vh;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+body,
+html {
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }

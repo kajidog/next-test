@@ -2,11 +2,11 @@ import { addDify } from "@/api/dify";
 import { useMutation } from "@/hooks/useMutation";
 import { Dify } from "@/types/dify";
 
-export interface useAddDify {
+export interface useAddDifyOptions {
   onSuccess?: (difyList: Dify[]) => void; // 作成成功時に親で実行したいコールバック関数
 }
 
-export const useAddDify = (options: useAddDify | undefined) => {
+export const useAddDify = (options?: useAddDifyOptions) => {
   // Dify作成API
   const mutation = useMutation({
     mutationFn: addDify(),
