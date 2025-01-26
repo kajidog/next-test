@@ -8,8 +8,7 @@
     "test:ci": "jest --ci",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "lint": "eslint . --config eslint.config.mjs",
-    "lint:fix": "eslint . --fix --config eslint.config.mjs",
+    "lint": "eslint . --fix",
     "format": "prettier --write ."
   },
   "dependencies": {
