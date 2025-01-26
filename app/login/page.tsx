@@ -1,12 +1,20 @@
+import { Typography } from "@mui/material";
 import { LoginForm } from "@/features/auth/components/LoginForm";
 
 export default () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md space-y-8 rounded-xl bg-white p-10 shadow-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          ログイン
-        </h2>
+      <div className="w-full max-w-md space-y-8 rounded-xl">
+        <Typography
+          className="mt-6 text-3xl font-extrabold text-gray-900"
+          variant="h2"
+          fontSize={25}
+        >
+          はじめましょう！👋
+        </Typography>
+        <Typography variant="subtitle1">
+          続行するにはログインしてください。
+        </Typography>
         <LoginForm />
       </div>
     </div>

@@ -1,5 +1,8 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { AuthError } from "next-auth";
 import { signIn } from "@/auth";
 
 export async function serverGithubAction() {
@@ -7,22 +10,38 @@ export async function serverGithubAction() {
   return await signIn("github", { redirectTo: "/dashboard" });
 }
 
-export async function serverAction(formData: FormData) {
+export type State = {
+  error?: string;
+  success?: boolean;
+};
+
+export async function serverSignIn(
+  prevState: State,
+  formData: FormData,
+): Promise<State> {
   "use server";
 
-  try {
-    const result = await signIn("credentials", {
-      ...Object.fromEntries(formData),
-      redirect: false,
-    });
-
-    if (result?.error) {
-      return { success: false, error: result.error };
+  const result = await signIn("credentials", {
+    ...Object.fromEntries(formData),
+    redirect: false,
+  }).catch((error) => {
+    if (error instanceof AuthError) {
+      return {
+        success: false,
+        error: error?.message,
+      };
     } else {
-      return { success: true };
+      return {
+        success: false,
+        error: "An unexpected error occurred",
+      };
     }
-  } catch (error) {
-    console.error("Server action error:", error);
-    return { success: false, error: "An unexpected error occurred" };
+  });
+
+  if (result?.error) {
+    return { success: false, error: result.error };
   }
+
+  revalidatePath("/dashboard");
+  redirect("/dashboard");
 }

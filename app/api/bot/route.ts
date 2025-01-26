@@ -1,13 +1,10 @@
-import { MESSAGE_API_BASE_URL } from "@/constants/api-endpoints";
-import { Bot } from "@/types/bot";
 import { NextRequest, NextResponse } from "next/server";
+import { MESSAGE_API_BASE_URL } from "@/constants/api-endpoints";
 
 // ボット作成API
 export async function POST(request: NextRequest) {
   try {
     const newBot = await request.json();
-    console.log(newBot);
-
     const res = await fetch(`${MESSAGE_API_BASE_URL}/bot`, {
       method: "POST",
       body: JSON.stringify({
@@ -19,13 +16,14 @@ export async function POST(request: NextRequest) {
       cache: "no-store",
     });
     const data = await res.json();
+
     return NextResponse.json({ error: false, bots: [data] }, { status: 201 });
   } catch (error) {
     console.log(error);
 
     return NextResponse.json(
       { error: true, message: "Invalid request" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }

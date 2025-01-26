@@ -1,25 +1,24 @@
-import React, { ReactNode } from "react";
+import LoadingButton from "@mui/lab/LoadingButton";
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { useDialog } from "@/hooks/useDialog";
+import React, { ReactNode } from "react";
 import { useAddDify } from "@/features/dify/hooks/useAddDify";
-import LoadingButton from "@mui/lab/LoadingButton";
+import { useDialog } from "@/hooks/useDialog";
 import { Dify } from "@/types/dify";
 
-export interface AddDifyDialog {
+export interface AddDifyDialogProps {
   isOpen?: boolean;
   children: ReactNode;
   onSubmit?: (dify: Dify[]) => void;
 }
 
-export const AddDifyDialog: React.FC<AddDifyDialog> = (props) => {
+export const AddDifyDialog: React.FC<AddDifyDialogProps> = (props) => {
   const { isOpen, close, open } = useDialog({
     isOpen: props.isOpen,
   });
@@ -34,7 +33,7 @@ export const AddDifyDialog: React.FC<AddDifyDialog> = (props) => {
 
   // OKを押したときの処理
   const handleSubmitAddDifyDialog = (
-    event: React.FormEvent<HTMLFormElement>
+    event: React.FormEvent<HTMLFormElement>,
   ) => {
     event.preventDefault();
     // フォーム情報を取得しAPIを実行

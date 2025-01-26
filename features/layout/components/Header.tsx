@@ -1,10 +1,10 @@
+import React from "react";
 import { signOut } from "@/auth";
 import HeaderComponent from "@/components/ui/Header";
-import React from "react";
 
-export interface Header {}
+export interface HeaderProps {}
 
-export const Header: React.FC<Header> = () => {
+export const Header: React.FC<HeaderProps> = () => {
   return (
     <HeaderComponent
       signOut={async () => {

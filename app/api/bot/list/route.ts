@@ -1,12 +1,10 @@
+import { NextResponse } from "next/server";
 import { MESSAGE_API_BASE_URL } from "@/constants/api-endpoints";
-import { NextRequest, NextResponse } from "next/server";
 
 // ボット一覧を取得するAPI
 export async function GET() {
   try {
-    console.log("data");
-
-    const res = await fetch(`${MESSAGE_API_BASE_URL}/bot/list`, {
+    const res = await fetch(`${MESSAGE_API_BASE_URL}/bot`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -20,7 +18,7 @@ export async function GET() {
 
     return NextResponse.json(
       { error: true, message: "Invalid request" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }

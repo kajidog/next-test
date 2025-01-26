@@ -1,16 +1,17 @@
-import { NextAuthConfig } from "next-auth";
-import GitHub from "next-auth/providers/github";
-import { loginFormSchema } from "@/features/auth/utils/loginFormSchema";
-import { ZodError } from "zod";
+import { AuthError, NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import GitHub from "next-auth/providers/github";
+import { ZodError } from "zod";
+import { loginFormSchema } from "@/features/auth/utils/loginFormSchema";
 import { saltAndHashPassword } from "@/utils/password";
 
 export const authOption: NextAuthConfig = {
-  trustHost: true,
   providers: [
     GitHub,
     Credentials({
       // You can specify which fields should be submitted, by adding keys to the `credentials` object.
+      name: "Credentials",
+
       // e.g. domain, username, password, 2FA token, etc.
       credentials: {
         email: { label: "Email", type: "text" },
@@ -23,7 +24,7 @@ export const authOption: NextAuthConfig = {
           const { password } = await loginFormSchema.parseAsync(credentials);
 
           // logic to salt and hash password
-          const _ = saltAndHashPassword(password);
+          saltAndHashPassword(password);
 
           // logic to verify if user exists
           user = {
@@ -46,7 +47,7 @@ export const authOption: NextAuthConfig = {
         } catch (error) {
           if (error instanceof ZodError) {
             // Return `null` to indicate that the credentials are invalid
-            return null;
+            throw new AuthError(error.errors[0].message);
           } else {
             return null;
           }
@@ -63,4 +64,6 @@ export const authOption: NextAuthConfig = {
       return !!auth;
     },
   },
+  basePath: "/api/auth",
+  secret: process.env.AUTH_SECRET,
 };

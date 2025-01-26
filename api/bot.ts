@@ -1,13 +1,31 @@
-import { Bot, BotWithOptionalId } from "@/types/bot";
-import { createApiClient, get, post } from ".";
-import { API_ENDPOINTS } from "@/constants/api-endpoints";
 import { Edge, Node } from "@xyflow/react";
+import { API_ENDPOINTS } from "@/constants/api-endpoints";
+import { createApiClient, get, post } from ".";
+
+interface ApiChannel {
+  id: string;
+  name: string;
+}
+
+interface ApiGuild {
+  name: string;
+  id: string;
+  icon: string | null;
+  channels: ApiChannel[];
+}
+
+export interface ApiBot {
+  id: string;
+  name: string;
+  avatar: string | null;
+  guilds: ApiGuild[];
+}
 
 /**
  * サーバからボット一覧を取得
  */
 export interface BotsResponse {
-  bots: Bot[];
+  bots: ApiBot[];
 }
 export const fetchBots = () => {
   const client = createApiClient();
@@ -20,7 +38,7 @@ export const fetchBots = () => {
  */
 interface addBptResponse {
   error: boolean;
-  bots?: Bot[];
+  bots?: ApiBot[];
 }
 export const addBot = () => {
   const client = createApiClient();
@@ -37,7 +55,7 @@ export const addBot = () => {
  * @returns
  */
 
-export const fetchBotFlow = (name: Bot["name"]) => {
+export const fetchBotFlow = (name: ApiBot["name"]) => {
   const client = createApiClient();
   const url = API_ENDPOINTS.BOT.FLOW.INDEX(name);
   return () =>
@@ -53,11 +71,14 @@ export const fetchBotFlow = (name: Bot["name"]) => {
  */
 export const saveBotFlow = () => {
   const client = createApiClient();
-  return (body: { name: Bot["name"]; edges: Edge[]; nodes: Node[] }) => {
+  return (body: { name: ApiBot["name"]; edges: Edge[]; nodes: Node[] }) => {
     const url = API_ENDPOINTS.BOT.FLOW.INDEX(body.name);
     return post<{
       error: boolean;
-    }>(client, url, { ...body });
+    }>(client, url, {
+      ...body,
+      nodes: body.nodes.map((node) => ({ ...node, measured: [] })),
+    });
   };
 };
 

@@ -1,5 +1,5 @@
-import { MESSAGE_API_BASE_URL } from "@/constants/api-endpoints";
 import { NextRequest, NextResponse } from "next/server";
+import { MESSAGE_API_BASE_URL } from "@/constants/api-endpoints";
 
 // Dify作成API
 export async function POST(request: NextRequest) {
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       { error: true, message: "Invalid request" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }

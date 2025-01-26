@@ -1,15 +1,13 @@
 // src/api/index.ts
 
-import { BASE_URL } from "@/constants/api-endpoints";
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-
-// API のベース URL
+import { BASE_URL } from "@/constants/api-endpoints";
 
 // カスタム エラー クラス
 export class ApiError extends Error {
   constructor(
     public status: number,
-    message: string
+    message: string,
   ) {
     super(message);
     this.name = "ApiError";
@@ -30,7 +28,7 @@ export const createApiClient = (): AxiosInstance => {
 const rejectApiError = (error: any) => {
   if (error.response) {
     return Promise.reject(
-      new ApiError(error.response.status, error.response.data.message)
+      new ApiError(error.response.status, error.response.data.message),
     );
   }
   return Promise.reject(error);
@@ -40,7 +38,7 @@ const rejectApiError = (error: any) => {
 export const get = <T>(
   client: AxiosInstance,
   url: string,
-  config?: AxiosRequestConfig
+  config?: AxiosRequestConfig,
 ): Promise<T> =>
   client
     .get(url, config)
@@ -51,7 +49,7 @@ export const post = <T>(
   client: AxiosInstance,
   url: string,
   data?: any,
-  config?: AxiosRequestConfig
+  config?: AxiosRequestConfig,
 ): Promise<T> =>
   client
     .post(url, data, config)
@@ -62,7 +60,7 @@ export const put = <T>(
   client: AxiosInstance,
   url: string,
   data?: any,
-  config?: AxiosRequestConfig
+  config?: AxiosRequestConfig,
 ): Promise<T> =>
   client
     .put(url, data, config)
@@ -72,7 +70,7 @@ export const put = <T>(
 export const del = <T>(
   client: AxiosInstance,
   url: string,
-  config?: AxiosRequestConfig
+  config?: AxiosRequestConfig,
 ): Promise<T> =>
   client
     .delete(url, config)

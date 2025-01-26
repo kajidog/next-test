@@ -1,6 +1,6 @@
-import { User } from "@/types/user";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { User } from "@/types/user";
 
 interface AuthState {
   user: User | null;
@@ -20,8 +20,8 @@ export const useAuthStore = create<AuthState>()(
     {
       name: "auth-storage",
       getStorage: () => localStorage,
-    }
-  )
+    },
+  ),
 );
 
 // 認証状態を取得するためのセレクター

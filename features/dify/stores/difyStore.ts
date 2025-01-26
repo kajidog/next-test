@@ -1,11 +1,11 @@
-import { Dify } from "@/types/dify";
 import { create } from "zustand";
+import { DifyBot } from "@/types/bot";
 
 interface DifyState {
-  difyList: Dify[];
-  selectedDifyId: Dify["id"] | null;
-  setSelectedDifyId: (nextId: Dify["id"]) => void;
-  setDifyList: (difyList: Dify[]) => void;
+  difyList: DifyBot[];
+  selectedDifyId: DifyBot["id"] | null;
+  setSelectedDifyId: (nextId: DifyBot["id"]) => void;
+  setDifyList: (difyList: DifyBot[]) => void;
 }
 
 export const useDifyStore = create<DifyState>((set) => ({
