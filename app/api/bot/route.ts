@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { MESSAGE_API_BASE_URL } from "@/constants/api-endpoints";
+import { BOT_MANAGEMENT_SERVICE_BASE_URL } from "@/constants/api-endpoints";
 
 // ボット作成API
 export async function POST(request: NextRequest) {
   try {
     const newBot = await request.json();
-    const res = await fetch(`${MESSAGE_API_BASE_URL}/bot`, {
+    const res = await fetch(`${BOT_MANAGEMENT_SERVICE_BASE_URL}/bot`, {
       method: "POST",
       body: JSON.stringify({
         token: newBot.bot.name,

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { MESSAGE_API_BASE_URL } from "@/constants/api-endpoints";
+import { BOT_MANAGEMENT_SERVICE_BASE_URL } from "@/constants/api-endpoints";
 
 // Dify作成API
 export async function POST(request: NextRequest) {
@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     const newDify = await request.json();
     console.log(newDify);
 
-    const res = await fetch(`${MESSAGE_API_BASE_URL}/dify`, {
+    const res = await fetch(`${BOT_MANAGEMENT_SERVICE_BASE_URL}/dify`, {
       method: "POST",
       body: JSON.stringify(newDify),
       headers: {

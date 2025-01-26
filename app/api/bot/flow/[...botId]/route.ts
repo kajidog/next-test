@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { MESSAGE_API_BASE_URL } from "@/constants/api-endpoints";
+import { BOT_MANAGEMENT_SERVICE_BASE_URL } from "@/constants/api-endpoints";
 
 export async function POST(
   request: NextRequest,
@@ -7,7 +7,7 @@ export async function POST(
 ) {
   try {
     const body = await request.json();
-    await fetch(`${MESSAGE_API_BASE_URL}/flow-data`, {
+    await fetch(`${BOT_MANAGEMENT_SERVICE_BASE_URL}/flow-data`, {
       method: "POST",
       body: JSON.stringify({
         ...body,
@@ -33,7 +33,7 @@ export async function GET(
 ) {
   try {
     const res = await fetch(
-      `${MESSAGE_API_BASE_URL}/flow-data/${params.botId}`,
+      `${BOT_MANAGEMENT_SERVICE_BASE_URL}/flow-data/${params.botId}`,
       {
         method: "GET",
         headers: {
