@@ -3,7 +3,7 @@ import { clients, startBotClient } from "./clients";
 
 export default async function fetchChannels(
   accessToken: string,
-  guildId: string
+  guildId: string,
 ) {
   // ボットがまだログインしていない場合はログイン
   try {

@@ -1,15 +1,16 @@
 "use client";
 
-import AddBotDialog from "@/features/bot/components/AddBotDialog";
-import { useBot } from "@/features/bot/hooks/useBot";
+import { Divider, Skeleton, Typography } from "@mui/material";
 import AddDifyDialog from "@/features/dify/components/AddDifyDialog";
 import { useDify } from "@/features/dify/hooks/useDify";
-import { Divider, Skeleton, Typography } from "@mui/material";
+import AddBotDialog from "@/features/discordBot/components/AddBotDialog";
+import { useDiscordBot } from "@/features/discordBot/hooks/useDiscordBot";
 
 export const Sidebar = () => {
-  const { bots, mutation, selectedBotId, setSelectedBotId } = useBot({
-    isLoad: true,
-  });
+  const { discordBots, mutation, selectedBotId, setSelectedBotId } =
+    useDiscordBot({
+      isLoad: true,
+    });
   const dify = useDify({
     isLoad: true,
   });
@@ -29,7 +30,7 @@ export const Sidebar = () => {
         <div className="flex justify-center">
           <Typography fontWeight="bold">Discord</Typography>
         </div>
-        {bots.map((bot) => (
+        {discordBots.map((bot) => (
           <div
             className={`cursor-pointer w-full h-8 justify-center items-center flex ${
               selectedBotId === bot.name ? "bg-blue-500 text-white" : ""

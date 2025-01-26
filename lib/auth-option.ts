@@ -1,8 +1,8 @@
 import { AuthError, NextAuthConfig } from "next-auth";
-import GitHub from "next-auth/providers/github";
-import { loginFormSchema } from "@/features/auth/utils/loginFormSchema";
-import { ZodError } from "zod";
 import Credentials from "next-auth/providers/credentials";
+import GitHub from "next-auth/providers/github";
+import { ZodError } from "zod";
+import { loginFormSchema } from "@/features/auth/utils/loginFormSchema";
 import { saltAndHashPassword } from "@/utils/password";
 
 export const authOption: NextAuthConfig = {
@@ -24,7 +24,7 @@ export const authOption: NextAuthConfig = {
           const { password } = await loginFormSchema.parseAsync(credentials);
 
           // logic to salt and hash password
-          const _ = saltAndHashPassword(password);
+          saltAndHashPassword(password);
 
           // logic to verify if user exists
           user = {

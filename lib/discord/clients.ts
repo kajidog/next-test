@@ -16,13 +16,8 @@ export const startBotClient = async (accessToken: string) => {
   const client = clients[accessToken];
 
   if (!isLoggedIn[accessToken]) {
-    try {
-      await client.login(accessToken);
-      isLoggedIn[accessToken] = true;
-      console.log("Discord bot logged in");
-    } catch (error) {
-      throw error;
-    }
+    await client.login(accessToken);
+    isLoggedIn[accessToken] = true;
   }
   return client;
 };

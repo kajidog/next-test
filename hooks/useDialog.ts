@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-export interface useDialog {
+export interface useDialogOptions {
   isOpen?: boolean;
 }
 
-export const useDialog = (option?: useDialog) => {
+export const useDialog = (option?: useDialogOptions) => {
   const [isOpenState, setIsOpenState] = useState(option?.isOpen ?? false);
 
   const close = () => {

@@ -1,13 +1,13 @@
-import { fetchDifyList } from "@/api/dify";
-import { useDifyStore } from "../stores/difyStore";
-import { useMutation } from "@/hooks/useMutation";
 import { useEffect } from "react";
+import { fetchDifyList } from "@/api/dify";
+import { useMutation } from "@/hooks/useMutation";
+import { useDifyStore } from "../stores/difyStore";
 
-export interface useDify {
+export interface useDifyOptions {
   isLoad?: boolean;
 }
 
-export const useDify = (options?: useDify) => {
+export const useDify = (options?: useDifyOptions) => {
   const { setDifyList, difyList, selectedDifyId, setSelectedDifyId } =
     useDifyStore();
 
@@ -16,7 +16,7 @@ export const useDify = (options?: useDify) => {
     mutationFn: fetchDifyList(),
     onSuccess: (data) => {
       if (data?.difyList) {
-        setDifyList(data.difyList);
+        setDifyList(data.difyList.map((dify) => ({ ...dify, type: "dify" })));
         return data.difyList;
       }
       setDifyList([]);

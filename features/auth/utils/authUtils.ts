@@ -1,29 +1,30 @@
 "use server";
 
-import { signIn } from "@/auth";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { AuthError } from "next-auth";
+import { signIn } from "@/auth";
 
 export async function serverGithubAction() {
   "use server";
   return await signIn("github", { redirectTo: "/dashboard" });
 }
 
-export async function serverAction(formData: FormData) {
+export type State = {
+  error?: string;
+  success?: boolean;
+};
+
+export async function serverSignIn(
+  prevState: State,
+  formData: FormData,
+): Promise<State> {
   "use server";
 
-  try {
-    const result = await signIn("credentials", {
-      ...Object.fromEntries(formData),
-      redirect: false,
-    });
-
-    if (result?.error) {
-      return { success: false, error: result.error };
-    } else {
-      return { success: true };
-    }
-  } catch (error) {
-    console.error("Server action error:", error);
+  const result = await signIn("credentials", {
+    ...Object.fromEntries(formData),
+    redirect: false,
+  }).catch((error) => {
     if (error instanceof AuthError) {
       return {
         success: false,
@@ -35,5 +36,12 @@ export async function serverAction(formData: FormData) {
         error: "An unexpected error occurred",
       };
     }
+  });
+
+  if (result?.error) {
+    return { success: false, error: result.error };
   }
+
+  revalidatePath("/dashboard");
+  redirect("/dashboard");
 }

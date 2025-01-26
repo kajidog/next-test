@@ -1,38 +1,19 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { serverAction, serverGithubAction } from "../utils/authUtils";
-import { Alert, Card, CardContent, CardHeader } from "@mui/material";
-import { useState } from "react";
-export function LoginForm() {
-  const router = useRouter();
-  const [errorMessage, setErrorMessage] = useState<null | string>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const handleSubmit = async (formData: FormData) => {
-    try {
-      setLoading(true);
-      const result = await serverAction(formData);
+import { Alert, Card, CardContent } from "@mui/material";
+import { useFormState, useFormStatus } from "react-dom";
+import { serverGithubAction, serverSignIn, State } from "../utils/authUtils";
 
-      if (result.success) {
-        router.push("/dashboard");
-      } else {
-        setErrorMessage(result.error ?? null);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+export function LoginForm() {
+  const initialState: State = { error: "" };
+  const { pending } = useFormStatus();
+  const [state, dispatch] = useFormState(serverSignIn, initialState);
 
   return (
     <>
       <Card className="w-full max-w-md">
-        <CardHeader>
-          <h2 className="text-2xl font-bold text-center">ログイン</h2>
-        </CardHeader>
         <CardContent>
-          <form action={handleSubmit} className="space-y-4">
+          <form action={dispatch} className="space-y-4">
             <div>
               <label className="block text-sm font-medium mb-1" htmlFor="email">
                 メールアドレス
@@ -43,6 +24,7 @@ export function LoginForm() {
                 name="email"
                 className={`w-full p-2 border rounded-md border-gray-300`}
                 placeholder="example@example.com"
+                autoComplete="email"
               />
             </div>
             <div>
@@ -57,18 +39,19 @@ export function LoginForm() {
                 type="password"
                 name="password"
                 className={`w-full p-2 border rounded-md border-gray-300`}
+                autoComplete="current-password"
                 placeholder="********"
               />
             </div>
-            {errorMessage && (
+            {state.error && (
               <Alert severity="error" sx={{ mt: 2 }}>
-                {errorMessage}
+                {state.error}
               </Alert>
             )}
             <button
               type="submit"
               className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition-colors"
-              disabled={loading}
+              disabled={pending}
             >
               ログイン
             </button>

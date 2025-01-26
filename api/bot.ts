@@ -1,6 +1,6 @@
-import { createApiClient, get, post } from ".";
-import { API_ENDPOINTS } from "@/constants/api-endpoints";
 import { Edge, Node } from "@xyflow/react";
+import { API_ENDPOINTS } from "@/constants/api-endpoints";
+import { createApiClient, get, post } from ".";
 
 interface ApiChannel {
   id: string;
@@ -75,7 +75,10 @@ export const saveBotFlow = () => {
     const url = API_ENDPOINTS.BOT.FLOW.INDEX(body.name);
     return post<{
       error: boolean;
-    }>(client, url, { ...body });
+    }>(client, url, {
+      ...body,
+      nodes: body.nodes.map((node) => ({ ...node, measured: [] })),
+    });
   };
 };
 
