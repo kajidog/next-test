@@ -1,5 +1,7 @@
+import { BaseHandleStyle } from "@/constants/layout";
 import { Typography } from "@mui/material";
 import { Handle, NodeProps, Position } from "@xyflow/react";
+import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 
 export const CustomDifyNode = ({
   data,
@@ -11,18 +13,22 @@ export const CustomDifyNode = ({
 }>) => (
   <div
     style={{
-      padding: "10px",
+      padding: "20px",
       border: "1px solid #ddd",
       borderRadius: "5px",
       width: "300px",
-      background: "#f6fff0",
+      background: "#fff",
     }}
   >
-    <Handle type="target" position={Position.Left} />
-    <Typography variant="subtitle1">
-      Dify: <b>{data.label}</b>
+    <Handle style={BaseHandleStyle} type="target" position={Position.Left} />
+    <div className="flex">
+      <PsychologyOutlinedIcon />
+      <Typography variant="subtitle1">Dify</Typography>
+    </div>
+
+    <Typography variant="body1">
+      Dify:<b>{data.label}</b>に送信
     </Typography>
-    <Typography variant="body1">AI Botを利用</Typography>
-    <Handle type="source" position={Position.Right} />
+    <Handle style={BaseHandleStyle} type="source" position={Position.Right} />
   </div>
 );

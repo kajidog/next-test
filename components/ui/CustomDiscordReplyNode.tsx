@@ -1,3 +1,4 @@
+import { BaseHandleStyle } from "@/constants/layout";
 import { Typography } from "@mui/material";
 import { Handle, NodeProps, Position } from "@xyflow/react";
 
@@ -15,10 +16,10 @@ export const CustomDiscordReplyNode = ({
       border: "1px solid #ddd",
       borderRadius: "5px",
       width: "300px",
-      background: "#fff0f0",
+      background: "#fff",
     }}
   >
-    <Handle type="target" position={Position.Left} />
+    <Handle style={BaseHandleStyle} type="target" position={Position.Left} />
     <Typography variant="subtitle1">
       受信したDiscordのメッセージに返信
     </Typography>

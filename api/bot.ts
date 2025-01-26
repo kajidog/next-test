@@ -75,7 +75,10 @@ export const saveBotFlow = () => {
     const url = API_ENDPOINTS.BOT.FLOW.INDEX(body.name);
     return post<{
       error: boolean;
-    }>(client, url, { ...body });
+    }>(client, url, {
+      ...body,
+      nodes: body.nodes.map((node) => ({ ...node, measured: [] })),
+    });
   };
 };
 

@@ -16,7 +16,7 @@ export const useDify = (options?: useDify) => {
     mutationFn: fetchDifyList(),
     onSuccess: (data) => {
       if (data?.difyList) {
-        setDifyList(data.difyList);
+        setDifyList(data.difyList.map((dify) => ({ ...dify, type: "dify" })));
         return data.difyList;
       }
       setDifyList([]);
