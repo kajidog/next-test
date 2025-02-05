@@ -8,6 +8,8 @@ export function getNavigationIcon(id: string) {
   const iconStyle = { fontSize: "1.25rem", color: "#666" };
 
   switch (id) {
+    case "start":
+      return <ForumIcon sx={iconStyle} />;
     case "channel":
       return <ForumIcon sx={iconStyle} />;
     case "dify":

@@ -1,15 +1,9 @@
 import { Typography } from "@mui/material";
-import { Handle, NodeProps, Position } from "@xyflow/react";
+import { Handle, Position } from "@xyflow/react";
 import { BaseHandleStyle } from "@/constants/layout";
+import { CustomNodeProps } from "@/types/node";
 
-export const CustomDiscordReplyNode = ({
-  data,
-}: NodeProps<{
-  id: string;
-  type: string;
-  data: { label: string };
-  position: any;
-}>) => (
+export const CustomDiscordReplyNode = ({ data }: CustomNodeProps) => (
   <div
     style={{
       padding: "10px",

@@ -10,8 +10,8 @@ export async function POST(request: NextRequest) {
       {
         method: "POST",
         body: JSON.stringify({
-          name: body.messageStore.name,
-          url: body.messageStore.url,
+          name: body.name,
+          url: body.url,
         }),
         headers: {
           "Content-Type": "application/json",

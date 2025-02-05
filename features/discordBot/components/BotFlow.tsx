@@ -6,14 +6,16 @@ import {
   ReactFlow,
   ReactFlowProvider,
 } from "@xyflow/react";
-import React from "react";
+import React, { ReactNode } from "react";
 import { CustomChannelNode } from "@/components/ui/CustomChannelNode";
 import { CustomDifyNode } from "@/components/ui/CustomDifyNode";
 import { CustomDiscordReplyNode } from "@/components/ui/CustomDiscordReplyNode";
 import { CustomMessageStoreNode } from "@/components/ui/CustomMessageStoreNode";
 import { CustomServerNode } from "@/components/ui/CustomServerNode";
+import { CustomStartDeleteNode } from "@/components/ui/CustomStartDeleteNode";
 import { CustomStartNode } from "@/components/ui/CustomStartNode";
 import { DiscordBot } from "@/types/bot";
+import { CustomNodeProps } from "@/types/node";
 import { useBotFlow } from "../hooks/useBotFlow";
 import FooterNavigation from "./FooterNavigation";
 
@@ -21,11 +23,19 @@ export interface BotFlowProps {
   discordBotId: DiscordBot["id"];
 }
 
-const nodeTypes = {
-  server: CustomServerNode,
+const nodeTypes: Record<string, (node: CustomNodeProps) => ReactNode> = {
+  server: (node) => <CustomServerNode {...node} />,
   channel: CustomChannelNode,
   dify: CustomDifyNode,
-  start: CustomStartNode,
+  "start-message-post": (node) => (
+    <CustomStartNode {...{ ...node, data: { label: "Discord" } }} />
+  ),
+  start: (node) => (
+    <CustomStartNode {...{ ...node, data: { label: "Discord" } }} />
+  ),
+  "start-message-delete": (node) => (
+    <CustomStartDeleteNode {...{ ...node, data: { label: "Discord" } }} />
+  ),
   discordReply: CustomDiscordReplyNode,
   messageSave: CustomMessageStoreNode,
 };

@@ -10,7 +10,7 @@ export const createInitialFlow = (bot: DiscordBot) => {
   nodes.push({
     id: bot.id,
     type: "start",
-    data: { label: bot.name },
+    data: { label: "メッセージ受信" },
     position: { x: 0, y: 150 * oneIndex },
   });
   Object.keys(bot.guilds).forEach((guildId) => {

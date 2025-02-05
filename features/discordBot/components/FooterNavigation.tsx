@@ -42,11 +42,21 @@ export default function FooterNavigation(props: FooterNavigationProps) {
   const handleItemClick = (label: string) => {
     console.log("Clicked item ID:", label, activeSection);
 
+    if (activeSection === "start") {
+      props.setIsAddMode({
+        isAddMode: true,
+        type: label,
+        label,
+      });
+      return;
+    }
+
     props.setIsAddMode({
       isAddMode: true,
       type: activeSection ?? "",
       label,
     });
+
     handleClose();
   };
 
