@@ -1,16 +1,10 @@
 import WifiChannelOutlinedIcon from "@mui/icons-material/WifiChannelOutlined";
 import { Typography } from "@mui/material";
-import { Handle, NodeProps, Position } from "@xyflow/react";
+import { Handle, Position } from "@xyflow/react";
 import { BaseHandleStyle } from "@/constants/layout";
+import { CustomNodeProps } from "@/types/node";
 
-export const CustomChannelNode = ({
-  data,
-}: NodeProps<{
-  id: string;
-  type: string;
-  data: { label: string };
-  position: any;
-}>) => (
+export const CustomChannelNode = ({ data }: CustomNodeProps) => (
   <div
     style={{
       padding: "15px",

@@ -1,16 +1,10 @@
 import SaveAltOutlinedIcon from "@mui/icons-material/SaveAltOutlined";
 import { Typography } from "@mui/material";
-import { Handle, NodeProps, Position } from "@xyflow/react";
+import { Handle, Position } from "@xyflow/react";
 import { BaseHandleStyle } from "@/constants/layout";
+import { CustomNodeProps } from "@/types/node";
 
-export const CustomMessageStoreNode = ({
-  data,
-}: NodeProps<{
-  id: string;
-  type: string;
-  data: { label: string };
-  position: any;
-}>) => (
+export const CustomMessageStoreNode = ({ data }: CustomNodeProps) => (
   <div
     style={{
       padding: "20px",
@@ -26,7 +20,7 @@ export const CustomMessageStoreNode = ({
       <Typography variant="subtitle1">ストア</Typography>
     </div>
     <Typography variant="body1">
-      <b>{data.label}</b>にメッセージを保存
+      <b>{data.label}</b>にメッセージイベントを保存
     </Typography>
 
     <Handle style={BaseHandleStyle} type="source" position={Position.Right} />

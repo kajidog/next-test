@@ -1,16 +1,10 @@
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import { Typography } from "@mui/material";
-import { Handle, NodeProps, Position } from "@xyflow/react";
+import { Handle, Position } from "@xyflow/react";
 import { BaseHandleStyle } from "@/constants/layout";
+import { CustomNodeProps } from "@/types/node";
 
-export const CustomDifyNode = ({
-  data,
-}: NodeProps<{
-  id: string;
-  type: string;
-  data: { label: string };
-  position: any;
-}>) => (
+export const CustomDifyNode = ({ data }: CustomNodeProps) => (
   <div
     style={{
       padding: "20px",

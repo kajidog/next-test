@@ -67,6 +67,20 @@ export const useNavigationData = () => {
   return {
     navigationData: [
       {
+        id: "start",
+        title: "開始ノード",
+        items: [
+          {
+            id: "start-message-post",
+            name: "メッセージ投稿",
+          },
+          {
+            id: "start-message-delete",
+            name: "メッセージ削除",
+          },
+        ],
+      },
+      {
         id: "channel",
         title: "Discord",
         items: channels,

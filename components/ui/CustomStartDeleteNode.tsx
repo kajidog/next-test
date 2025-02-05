@@ -4,7 +4,7 @@ import { Handle, Position } from "@xyflow/react";
 import { BaseHandleStyle } from "@/constants/layout";
 import { CustomNodeProps } from "@/types/node";
 
-export const CustomStartNode = ({ data }: CustomNodeProps) => (
+export const CustomStartDeleteNode = ({ data }: CustomNodeProps) => (
   <div
     style={{
       padding: "15px",
@@ -17,7 +17,7 @@ export const CustomStartNode = ({ data }: CustomNodeProps) => (
     <div className="flex items-center">
       <PlayArrowOutlinedIcon fontSize="large" />
       <Typography variant="subtitle1">
-        <b>{data.label}</b>でメッセージ投稿
+        <b>{data.label}</b>でメッセージ削除
       </Typography>
     </div>
     <Handle style={BaseHandleStyle} type="source" position={Position.Right} />
